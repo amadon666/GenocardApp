@@ -7,19 +7,19 @@ using System.Text;
 namespace GenocardApp
 {
 	public static class GeneApi {
-		/// Выводит информацию об указанном гене
+		/// Г‚Г»ГўГ®Г¤ГЁГІ ГЁГ­ГґГ®Г°Г¬Г Г¶ГЁГѕ Г®ГЎ ГіГЄГ Г§Г Г­Г­Г®Г¬ ГЈГҐГ­ГҐ
 		public static string GetGeneInfo(string genename) {
 			genename = genename.Trim();
 			string currentString = null;
 			StringBuilder builder = new StringBuilder();
-			using (StreamReader sr = new StreamReader(@"C:\Users\fdshfgas\Documents\_USB_\Разработки 2020\App 2020\GenocardApp\Генокарта.txt", Encoding.Default)) {
+			using (StreamReader sr = new StreamReader(@"C:\Users\fdshfgas\Documents\_USB_\ГђГ Г§Г°Г ГЎГ®ГІГЄГЁ 2020\App 2020\GenocardApp\ГѓГҐГ­Г®ГЄГ Г°ГІГ .txt", Encoding.Default)) {
 				currentString = sr.ReadLine();
 				
-				while(currentString != "-Ген " + genename) {
+				while(currentString != "-ГѓГҐГ­ " + genename) {
 					currentString = sr.ReadLine();
 				}
 				
-				if (currentString.StartsWith("-Ген " + genename)) {
+				if (currentString.StartsWith("-ГѓГҐГ­ " + genename)) {
 					while ((currentString != "-----")) {
 						currentString = sr.ReadLine();
 						if (currentString == "-----") break;
@@ -29,29 +29,29 @@ namespace GenocardApp
 			}
 			return builder.ToString();
 		}
-		/// Возвращает краткое описание гена
+		/// Г‚Г®Г§ГўГ°Г Г№Г ГҐГІ ГЄГ°Г ГІГЄГ®ГҐ Г®ГЇГЁГ±Г Г­ГЁГҐ ГЈГҐГ­Г 
 		public static string GetShortDescription(string geneinfo) {
 			StringBuilder builder = new StringBuilder();
 			string[] parts = geneinfo.Split('\n');
 			foreach (string part in parts) {
-				if (part == "Описание гена и белка\r") {
+				if (part == "ГЋГЇГЁГ±Г Г­ГЁГҐ ГЈГҐГ­Г  ГЁ ГЎГҐГ«ГЄГ \r") {
 					break;
 				}
 				builder.AppendLine(part);
 			}
 			return builder.ToString();
 		}
-		// Возвращает Описание гена и белка
+		// Г‚Г®Г§ГўГ°Г Г№Г ГҐГІ ГЋГЇГЁГ±Г Г­ГЁГҐ ГЈГҐГ­Г  ГЁ ГЎГҐГ«ГЄГ 
 		public static string GetDescriptionGeneAndProtein(string geneinfo) {
 			StringBuilder builder = new StringBuilder();
-			// считывать ли данные
+			// Г±Г·ГЁГІГ»ГўГ ГІГј Г«ГЁ Г¤Г Г­Г­Г»ГҐ
 			bool isread = false;
 			string[] parts = geneinfo.Split('\n');
 			
 			foreach (string part in parts) {
-				isread |= part == "Описание гена и белка\r";
+				isread |= part == "ГЋГЇГЁГ±Г Г­ГЁГҐ ГЈГҐГ­Г  ГЁ ГЎГҐГ«ГЄГ \r";
 				
-				if (part == "Связанные болезни и признаки\r") {
+				if (part == "Г‘ГўГїГ§Г Г­Г­Г»ГҐ ГЎГ®Г«ГҐГ§Г­ГЁ ГЁ ГЇГ°ГЁГ§Г­Г ГЄГЁ\r") {
 					break;
 				}
 				
@@ -61,17 +61,17 @@ namespace GenocardApp
 			}
 			return builder.ToString();
 		}
-		// Возвращает Связанные болезни и признаки
+		// Г‚Г®Г§ГўГ°Г Г№Г ГҐГІ Г‘ГўГїГ§Г Г­Г­Г»ГҐ ГЎГ®Г«ГҐГ§Г­ГЁ ГЁ ГЇГ°ГЁГ§Г­Г ГЄГЁ
 		public static string GetCombinedIllnessAndCharacteristics(string geneinfo) {
 			StringBuilder builder = new StringBuilder();
-			// считывать ли данные
+			// Г±Г·ГЁГІГ»ГўГ ГІГј Г«ГЁ Г¤Г Г­Г­Г»ГҐ
 			bool isread = false;
 			string[] parts = geneinfo.Split('\n');
 			
 			foreach (string part in parts) {
-				isread |= part == "Связанные болезни и признаки\r";
+				isread |= part == "Г‘ГўГїГ§Г Г­Г­Г»ГҐ ГЎГ®Г«ГҐГ§Г­ГЁ ГЁ ГЇГ°ГЁГ§Г­Г ГЄГЁ\r";
 				
-				if (part == "Распределение мутаций в гене\r") {
+				if (part == "ГђГ Г±ГЇГ°ГҐГ¤ГҐГ«ГҐГ­ГЁГҐ Г¬ГіГІГ Г¶ГЁГ© Гў ГЈГҐГ­ГҐ\r") {
 					break;
 				}
 				
@@ -81,17 +81,17 @@ namespace GenocardApp
 			}
 			return builder.ToString();
 		}
-		// Возвращает Распределение мутаций в гене
+		// Г‚Г®Г§ГўГ°Г Г№Г ГҐГІ ГђГ Г±ГЇГ°ГҐГ¤ГҐГ«ГҐГ­ГЁГҐ Г¬ГіГІГ Г¶ГЁГ© Гў ГЈГҐГ­ГҐ
 		public static string GetDistributionInGen(string geneinfo) {
 			StringBuilder builder = new StringBuilder();
-			// считывать ли данные
+			// Г±Г·ГЁГІГ»ГўГ ГІГј Г«ГЁ Г¤Г Г­Г­Г»ГҐ
 			bool isread = false;
 			string[] parts = geneinfo.Split('\n');
 			
 			foreach (string part in parts) {
-				isread |= part == "Распределение мутаций в гене\r";
+				isread |= part == "ГђГ Г±ГЇГ°ГҐГ¤ГҐГ«ГҐГ­ГЁГҐ Г¬ГіГІГ Г¶ГЁГ© Гў ГЈГҐГ­ГҐ\r";
 				
-				if (part == "Перспективы генетической терапии\r") {
+				if (part == "ГЏГҐГ°Г±ГЇГҐГЄГІГЁГўГ» ГЈГҐГ­ГҐГІГЁГ·ГҐГ±ГЄГ®Г© ГІГҐГ°Г ГЇГЁГЁ\r") {
 					break;
 				}
 				
@@ -101,14 +101,14 @@ namespace GenocardApp
 			}
 			return builder.ToString();
 		}
-		// Возвращает Перспективы генетической терапии
+		// Г‚Г®Г§ГўГ°Г Г№Г ГҐГІ ГЏГҐГ°Г±ГЇГҐГЄГІГЁГўГ» ГЈГҐГ­ГҐГІГЁГ·ГҐГ±ГЄГ®Г© ГІГҐГ°Г ГЇГЁГЁ
 		public static string GetPerspectives(string geneinfo) {
 			StringBuilder builder = new StringBuilder();
 			string[] parts = geneinfo.Split('\n');
 			bool isread = false;
 			
 			foreach (string part in parts) {
-				isread |= part == "Перспективы генетической терапии\r";
+				isread |= part == "ГЏГҐГ°Г±ГЇГҐГЄГІГЁГўГ» ГЈГҐГ­ГҐГІГЁГ·ГҐГ±ГЄГ®Г© ГІГҐГ°Г ГЇГЁГЁ\r";
 				
 				if (isread) {
 					builder.AppendLine(part);
@@ -121,7 +121,7 @@ namespace GenocardApp
 	
 	public class GenocardForm : Form
 	{
-		public string ImagePath = @"C:\Users\fdshfgas\Documents\_USB_\Разработки 2020\App 2020\GenocardApp\Images\";
+		public string ImagePath = @"C:\Users\fdshfgas\Documents\_USB_\ГђГ Г§Г°Г ГЎГ®ГІГЄГЁ 2020\App 2020\GenocardApp\Images\";
 		public Panel panelHeader = new Panel();
 		public Panel panelMenu = new Panel();
 		public Button bGenocard = new Button();
@@ -288,11 +288,11 @@ namespace GenocardApp
         	this.lAboutProject.Visible = true;
         }
         
-        public string DictPath = @"C:\Users\fdshfgas\Documents\_USB_\Разработки 2020\App 2020\GenocardApp\Словарь терминов.txt";
+        public string DictPath = @"C:\Users\fdshfgas\Documents\_USB_\ГђГ Г§Г°Г ГЎГ®ГІГЄГЁ 2020\App 2020\GenocardApp\Г‘Г«Г®ГўГ Г°Гј ГІГҐГ°Г¬ГЁГ­Г®Гў.txt";
         
-        // Путь к файлу "Список генов.txt"
-        public string listGenesPath = @"C:\Users\fdshfgas\Documents\_USB_\Разработки 2020\App 2020\GenocardApp\Список генов.txt";
-        // Возвращает true если ген с данным названием есть в базе, иначе false
+        // ГЏГіГІГј ГЄ ГґГ Г©Г«Гі "Г‘ГЇГЁГ±Г®ГЄ ГЈГҐГ­Г®Гў.txt"
+        public string listGenesPath = @"C:\Users\fdshfgas\Documents\_USB_\ГђГ Г§Г°Г ГЎГ®ГІГЄГЁ 2020\App 2020\GenocardApp\Г‘ГЇГЁГ±Г®ГЄ ГЈГҐГ­Г®Гў.txt";
+        // Г‚Г®Г§ГўГ°Г Г№Г ГҐГІ true ГҐГ±Г«ГЁ ГЈГҐГ­ Г± Г¤Г Г­Г­Г»Г¬ Г­Г Г§ГўГ Г­ГЁГҐГ¬ ГҐГ±ГІГј Гў ГЎГ Г§ГҐ, ГЁГ­Г Г·ГҐ false
         private bool IsExistGeneInBase(string genename) {
         	string sgenes = null;
         	using (StreamReader sr = new StreamReader(listGenesPath, Encoding.Default)) {
@@ -309,7 +309,7 @@ namespace GenocardApp
         }
         
         private string ReturnInfoAboutGene(string genename) {
-			return IsExistGeneInBase(genename) ? GeneApi.GetGeneInfo(genename) : "Нет данных по этому запросу";
+			return IsExistGeneInBase(genename) ? GeneApi.GetGeneInfo(genename) : "ГЌГҐГІ Г¤Г Г­Г­Г»Гµ ГЇГ® ГЅГІГ®Г¬Гі Г§Г ГЇГ°Г®Г±Гі";
         }
         
         public void SearchInfo_Click(object sender, EventArgs args) {
@@ -405,7 +405,7 @@ namespace GenocardApp
 	        this.lAboutProject.Location = new Point(208, 39);
 	        this.lAboutProject.Font = new Font("Century Gothic", 12, FontStyle.Regular, GraphicsUnit.Point, (Byte)204);
 	        this.lAboutProject.Visible = false;
-	        this.lAboutProject.Text = GetTextFromFile(@"C:\Users\fdshfgas\Documents\_USB_\Разработки 2020\App 2020\GenocardApp\О проекте.txt");
+	        this.lAboutProject.Text = GetTextFromFile(@"C:\Users\fdshfgas\Documents\_USB_\ГђГ Г§Г°Г ГЎГ®ГІГЄГЁ 2020\App 2020\GenocardApp\ГЋ ГЇГ°Г®ГҐГЄГІГҐ.txt");
 	        
 	        this.pictureLogo.BackgroundImage = Image.FromFile(ImagePath + "mainlogo.png");
 	        this.pictureLogo.BackgroundImageLayout = ImageLayout.Stretch;
@@ -422,7 +422,7 @@ namespace GenocardApp
 	        this.bGenocard.ForeColor = Color.White;
 	        this.bGenocard.Location = new Point(0, 69);
 	        this.bGenocard.Size = new Size(206, 77);
-	        this.bGenocard.Text = "Генокарта";
+	        this.bGenocard.Text = "ГѓГҐГ­Г®ГЄГ Г°ГІГ ";
 	        this.bGenocard.UseVisualStyleBackColor = true;
 	        this.bGenocard.Image = Image.FromFile(ImagePath + "genocard.png");
 	        this.bGenocard.ImageAlign = ContentAlignment.MiddleLeft;
@@ -438,7 +438,7 @@ namespace GenocardApp
 	        this.bDictionary.ForeColor = Color.White;
 	        this.bDictionary.Location = new Point(0, 146);
 	        this.bDictionary.Size = new Size(206, 77);
-	        this.bDictionary.Text = "Словарь";
+	        this.bDictionary.Text = "Г‘Г«Г®ГўГ Г°Гј";
 	        this.bDictionary.UseVisualStyleBackColor = true;
 	        this.bDictionary.Image = Image.FromFile(ImagePath + "dictionary.png");
 	        this.bDictionary.ImageAlign = ContentAlignment.MiddleLeft;
@@ -454,7 +454,7 @@ namespace GenocardApp
 	        this.bAboutProject.ForeColor = Color.White;
 	        this.bAboutProject.Location = new Point(0, 223);
 	        this.bAboutProject.Size = new Size(206, 77);
-	        this.bAboutProject.Text = "О проекте";
+	        this.bAboutProject.Text = "ГЋ ГЇГ°Г®ГҐГЄГІГҐ";
 	        this.bAboutProject.UseVisualStyleBackColor = true;
 	        this.bAboutProject.Image = Image.FromFile(ImagePath + "about.png");
 	        this.bAboutProject.ImageAlign = ContentAlignment.MiddleLeft;
@@ -470,7 +470,7 @@ namespace GenocardApp
 	        this.bExit.ForeColor = Color.White;
 	        this.bExit.Location = new Point(0, 300);
 	        this.bExit.Size = new Size(206, 60);
-	        this.bExit.Text = "Выход";
+	        this.bExit.Text = "Г‚Г»ГµГ®Г¤";
 	        this.bExit.UseVisualStyleBackColor = true;
 	        this.bExit.Image = Image.FromFile(ImagePath + "exit.png");
 	        this.bExit.ImageAlign = ContentAlignment.MiddleLeft;
@@ -513,7 +513,7 @@ namespace GenocardApp
 	        this.lSearch.ForeColor = SystemColors.ButtonFace;
 	        this.lSearch.Location = new Point(20, 13);
 	        this.lSearch.Size = new Size(74, 24);
-	        this.lSearch.Text = "Поиск:";
+	        this.lSearch.Text = "ГЏГ®ГЁГ±ГЄ:";
 	
 	        this.tSearch.BackColor = Color.FromArgb(46,48,49);
 	        this.tSearch.BorderStyle = BorderStyle.FixedSingle;
